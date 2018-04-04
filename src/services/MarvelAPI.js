@@ -8,9 +8,9 @@ let hash = md5(
 
 const AxiosInstance = axios.create({
   baseURL: "https://gateway.marvel.com/v1/public",
-  headers: { Accept: "*/*" },
+  headers: { Accept: "application/json" },
   params: {
-    apikey: process.env.REACT_APP_PUBLIC_KEY,
+    apikey: process.env.RAZZLE_MARVEL_PUBLIC,
     ts: ts,
     hash: hash,
     limit: 20,

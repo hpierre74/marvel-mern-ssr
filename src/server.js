@@ -1,6 +1,13 @@
 import App from './App';
 import React from 'react';
+//Server
 import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import Router from './server/api/routes/index.routes';
+//SSR
 import theme from './theme';
 import jss from './styles';
 import { SheetsRegistry } from 'react-jss';
@@ -14,6 +21,11 @@ const server = express();
 
 server
   .disable('x-powered-by')
+  .use(cors({ origin: true }))
+  .use(bodyParser.json())
+  .use(bodyParser.urlencoded({extended: true}))
+  .use(cookieParser())
+  .use('/api', Router)
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/*', (req, res) => {
     // This is needed in order to deduplicate the injection of CSS in the page.
@@ -30,13 +42,14 @@ server
     const css = sheetsRegistry.toString();
     res.send(
       `<!doctype html>
-    <html lang="">
+    <html lang="en">
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta charSet='utf-8' />
-        <title>Welcome to Razzle</title>
+        <title>Marvel Test</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         ${assets.client.css
           ? `<link rel="stylesheet" href="${assets.client.css}">`
           : ''}
