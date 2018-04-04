@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import Router from './server/api/routes/index.routes';
+import router from './server/api/routes/index.routes';
 //SSR
 import theme from './theme';
 import jss from './styles';
@@ -14,6 +14,20 @@ import { SheetsRegistry } from 'react-jss';
 import { JssProvider } from 'react-jss';
 import { MuiThemeProvider } from 'material-ui/styles';
 import { renderToString } from 'react-dom/server';
+
+import config from './config';
+
+
+// Set native promises as mongoose promise
+mongoose.Promise = global.Promise;
+
+// MongoDB Connection
+mongoose.connect(config.mongoURL, (error) => {
+  if (error) {
+    console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
+    throw error;
+  }
+});
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
@@ -25,7 +39,7 @@ server
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({extended: true}))
   .use(cookieParser())
-  .use('/api', Router)
+  .use('/api', router)
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/*', (req, res) => {
     // This is needed in order to deduplicate the injection of CSS in the page.

@@ -31,13 +31,13 @@ const styles = theme => ({
     flexGrow: 1,
     width: "50%",
     margin: "0 auto",
-    marginTop: theme.spacing.unit * 3
+    marginTop: theme.spacing.unit * 3,
+    textAlign: 'center'
   },
   tabs: {
     backgroundColor: blue[400]
   },
   loader: {
-    textAlign: "center"
   }
 });
 
