@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
-import CharacterContainer from './components/characters/CharactersContainer';
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -16,7 +15,7 @@ const styles = theme => ({
 const App = ({classes}) => (
   <div>
     <Paper className={classes.root} elevation={4}>
-      <CharacterContainer />
+      <p>yolo</p>
     </Paper>
   </div>
 );

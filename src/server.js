@@ -56,7 +56,7 @@ server
     const css = sheetsRegistry.toString();
     res.send(
       `<!doctype html>
-    <html lang="en">
+    <html lang="fr">
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta charSet='utf-8' />
